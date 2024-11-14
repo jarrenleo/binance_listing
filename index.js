@@ -3,22 +3,12 @@ import { config } from "dotenv";
 config();
 
 let latestListingId;
+const chatIds = ["-1002338679242", "-1002378609137"];
+
 const bot = new Telegraf(process.env.TELEGRAM_TOKEN);
 
-async function getChatIds() {
-  const updates = await bot.telegram.getUpdates();
-
-  const chatIds = [];
-
-  for (const update of updates) {
-    if (update.message) chatIds.push(update.message.chat.id);
-  }
-
-  return chatIds;
-}
-
 function getMessage(listing) {
-  return `${listing.title}\n\n[Link to Announcement](https://www.binance.com/en/support/announcement/${listing.code})`;
+  return `${listing.title}\n\nLink to Announcement: https://www.binance.com/en/support/announcement/${listing.code}`;
 }
 
 async function main() {
@@ -32,18 +22,13 @@ async function main() {
     const listings = data.data.catalogs[0].articles;
     const currentLatestListingId = listings[0].id;
 
-    if (!latestListingId) {
-      latestListingId = currentLatestListingId;
-      return;
-    }
+    if (!latestListingId) latestListingId = currentLatestListingId;
     if (latestListingId === currentLatestListingId) return;
 
     let latestListingIdIndex = listings.findIndex(
       (listing) => listing.id === latestListingId
     );
     if (latestListingIdIndex === -1) latestListingIdIndex = 10;
-
-    const chatIds = await getChatIds();
 
     for (const chatId of chatIds) {
       for (let i = latestListingIdIndex - 1; i >= 0; --i) {
