@@ -3,7 +3,7 @@ import { config } from "dotenv";
 config();
 
 let latestListingId;
-const chatIds = ["-1002338679242", "-1002378609137"];
+const chatIds = ["-1002338679242", "-1002378609137", "-1001967085221"];
 
 const bot = new Telegraf(process.env.TELEGRAM_TOKEN);
 
