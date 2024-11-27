@@ -3,7 +3,7 @@ import { config } from "dotenv";
 config();
 
 let latestListingId;
-const chatIds = ["-1002378609137", "-1001967085221"];
+const chatIds = ["-1001967085221", "-1002378609137"];
 
 const bot = new Telegraf(process.env.TELEGRAM_TOKEN);
 
@@ -14,7 +14,7 @@ function getMessage(listing) {
 async function main() {
   try {
     const response = await fetch(
-      "https://www.binance.com/bapi/composite/v1/public/cms/article/list/query?type=1&pageNo=1&pageSize=10"
+      "https://www.binance.com/bapi/composite/v1/public/cms/article/list/query?type=1&pageNo=1&pageSize=5"
     );
     if (!response.ok) throw new Error("Failed to fetch data");
     const data = await response.json();
@@ -28,7 +28,7 @@ async function main() {
     let latestListingIdIndex = listings.findIndex(
       (listing) => listing.id === latestListingId
     );
-    if (latestListingIdIndex === -1) latestListingIdIndex = 10;
+    if (latestListingIdIndex === -1) latestListingIdIndex = 5;
 
     for (const chatId of chatIds) {
       for (let i = latestListingIdIndex - 1; i >= 0; --i) {
