@@ -22,13 +22,16 @@ async function main() {
     const listings = data.data.catalogs[0].articles;
     const currentLatestListingId = listings[0].id;
 
-    if (!latestListingId) latestListingId = currentLatestListingId;
+    if (!latestListingId) {
+      latestListingId = currentLatestListingId;
+      return;
+    }
     if (latestListingId === currentLatestListingId) return;
 
     let latestListingIdIndex = listings.findIndex(
       (listing) => listing.id === latestListingId
     );
-    if (latestListingIdIndex === -1) latestListingIdIndex = 5;
+    if (latestListingIdIndex === -1) return;
 
     for (const chatId of chatIds) {
       for (let i = latestListingIdIndex - 1; i >= 0; --i) {

@@ -1,6 +1,6 @@
 {
   "name": "binance-listing",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -12,7 +12,7 @@
   "license": "ISC",
   "description": "Telegram bot that monitors new Binance Cryptocurrency listings and sends notifications to chat",
   "dependencies": {
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.4.7",
     "telegraf": "^4.16.3"
   }
 }
