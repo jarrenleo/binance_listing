@@ -14,7 +14,7 @@ function getMessage(listing) {
 async function main() {
   try {
     const response = await fetch(
-      "https://www.binance.com/bapi/composite/v1/public/cms/article/list/query?type=1&pageNo=1&pageSize=5"
+      "https://www.binance.com/bapi/apex/v1/public/apex/cms/article/list/query?type=1&pageNo=1&pageSize=10&catalogId=48"
     );
     if (!response.ok) throw new Error("Failed to fetch data");
     const data = await response.json();
